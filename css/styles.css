@@ -248,3 +248,25 @@ body.timer-open{overflow:hidden}
 }
 
 .timer-exercise-number{display:none!important}
+
+
+/* Final visual override: explicit contrast on all timer controls */
+.timer-screen .timer-icon,
+.timer-screen .timer-control{color:#f2dcff!important;opacity:1!important}
+.timer-screen .timer-icon svg,
+.timer-screen .timer-control svg{stroke:#f2dcff!important;fill:none!important;opacity:1!important}
+.timer-screen .timer-control.timer-play{color:#170820!important}
+.timer-screen .timer-control.timer-play svg{stroke:#170820!important;fill:none!important}
+.timer-screen .timer-control.timer-play svg path{stroke:#170820!important;fill:#170820!important}
+.timer-screen .timer-control:not(.timer-play){background:transparent!important}
+@media(max-width:650px){
+ .timer-screen{
+  height:100dvh;height:100svh;
+  grid-template-rows:40px minmax(0,1fr) auto 62px 14px;
+  padding-top:8px;
+ }
+ .timer-screen .timer-ring{width:min(52vw,23svh,230px)!important}
+ .timer-screen .timer-exercise-list{align-self:center}
+ .timer-screen .timer-exercise{min-height:58px}
+ .timer-screen .timer-control.timer-play{width:62px;height:62px;min-width:62px;min-height:62px}
+}

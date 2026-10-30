@@ -4,6 +4,7 @@ import {loadBank,saveBank,loadLessons,saveLessons,loadCurrent,saveCurrent,makeId
 import {renderScript} from './script-view.js';
 const $=id=>document.getElementById(id);
 let bank=mergeExerciseBanks(loadBank()||[],INITIAL_EXERCISES),lessons=loadLessons(),current=normalizeLesson(loadCurrent()||createLesson()),builder=new LessonBuilder(current),selected=new Set(),muscleFilter='';
+saveBank(bank);
 
 function persist(){saveBank(bank);saveLessons(lessons);saveCurrent(current);$('save-status').textContent='Salvo localmente'}
 function notify(message){$('save-status').textContent=message;setTimeout(()=>{if($('save-status').textContent===message)persist()},2000)}

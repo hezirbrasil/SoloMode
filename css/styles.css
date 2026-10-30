@@ -270,3 +270,8 @@ body.timer-open{overflow:hidden}
  .timer-screen .timer-exercise{min-height:58px}
  .timer-screen .timer-control.timer-play{width:62px;height:62px;min-width:62px;min-height:62px}
 }
+
+
+/* Ícone vetorial do botão de iniciar no construtor Solo */
+#start-timer{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+#start-timer .timer-launch-icon{width:14px;height:14px;display:block;fill:currentColor;stroke:none;flex:0 0 auto}

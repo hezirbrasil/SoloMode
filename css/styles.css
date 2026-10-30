@@ -246,3 +246,5 @@ body.timer-open{overflow:hidden}
  .timer-control.timer-play{width:54px;height:54px;min-width:54px;min-height:54px}
  .timer-controls{height:56px}
 }
+
+.timer-exercise-number{display:none!important}

@@ -2,6 +2,7 @@ import {INITIAL_EXERCISES,MUSCLE_ORDER,mergeExerciseBanks,addExercise,updateExer
 import {createLesson,LessonBuilder} from './lesson-builder.js';
 import {loadBank,saveBank,loadLessons,saveLessons,loadCurrent,saveCurrent,makeId,normalizeLesson,exportJson,importJson} from './storage.js';
 import {renderScript} from './script-view.js';
+import {TimerController} from './timer-controller.js';
 const $=id=>document.getElementById(id);
 let bank=mergeExerciseBanks(loadBank()||[],INITIAL_EXERCISES),lessons=loadLessons(),current=normalizeLesson(loadCurrent()||createLesson()),builder=new LessonBuilder(current),selected=new Set(),muscleFilter='';
 saveBank(bank);
@@ -45,35 +46,14 @@ document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySe
 $('print-script').onclick=()=>window.print();$('export-lesson').onclick=()=>exportJson((current.name||'aula').toLowerCase().replace(/[^a-z0-9-]+/g,'-')+'.json',{format:'workout-fight-solo',version:1,lesson:current,bank});
 $('import-lesson').onchange=async event=>{const file=event.target.files?.[0];if(!file)return;try{const data=await importJson(file),lesson=normalizeLesson(data.lesson||data);if(!Array.isArray(lesson.blocks))throw new Error('Estrutura de aula inválida.');if(Array.isArray(data.bank)){bank=mergeExerciseBanks([...bank,...data.bank],[])}setCurrent(lesson);notify('Aula importada')}catch(error){notify(error.message)}event.target.value=''};
 window.addEventListener('beforeunload',()=>{saveCurrent(current);saveBank(bank);saveLessons(lessons)});
-let timerIndex=0,timerPhase='work',timerRemaining=50,timerRunning=false,timerInterval=null,timerElapsed=0;
-function timerDuration(){const block=current.blocks[timerIndex];return seconds(timerPhase==='work'?block?.work:block?.rest)}
-function timerLabel(block){return block.exercises?block.exercises.map(e=>e.name).join(' · '):block.name}
-function timerFormat(value){const n=Math.max(0,Math.ceil(value));return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
-function timerRender(){
- const block=current.blocks[timerIndex];if(!block)return;
- const duration=Math.max(1,timerDuration());$('timer-clock').textContent=timerFormat(timerRemaining);
- $('timer-phase').textContent=timerPhase==='work'?'EXECUÇÃO':'DESCANSO';
- $('timer-ring').style.setProperty('--ring-progress',(timerRemaining/duration*100)+'%');
- const total=current.blocks.reduce((sum,b)=>sum+seconds(b.work)+seconds(b.rest),0);
- const elapsed=current.blocks.slice(0,timerIndex).reduce((sum,b)=>sum+seconds(b.work)+seconds(b.rest),0)+(timerPhase==='rest'?seconds(block.work):0)+(duration-timerRemaining);
- $('timer-progress-fill').style.width=(total?Math.min(100,elapsed/total*100):0)+'%';
- const list=$('timer-exercise-list');list.innerHTML='';
- current.blocks.slice(timerIndex,timerIndex+3).forEach((item,i)=>{const row=document.createElement('div');row.className='timer-exercise'+(i===0?' active':'');const name=document.createElement('strong');name.textContent=timerLabel(item);row.append(name);list.append(row)});
- $('timer-play').innerHTML=timerRunning?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>';$('timer-play').setAttribute('aria-label',timerRunning?'Pausar':'Iniciar');
- $('start-timer').disabled=!current.blocks.length;
-}
-function timerAdvance(){
- if(timerPhase==='work'&&seconds(current.blocks[timerIndex]?.rest)>0){timerPhase='rest';timerRemaining=timerDuration()}
- else{timerPhase='work';timerIndex++;if(timerIndex>=current.blocks.length){timerPause();timerIndex=current.blocks.length-1;timerPhase='rest';timerRemaining=0;timerRender();return}timerRemaining=timerDuration()}
- timerRender();
-}
-function timerPause(){timerRunning=false;if(timerInterval){clearInterval(timerInterval);timerInterval=null}if($('timer-screen'))timerRender()}
-function timerPlay(){if(!current.blocks.length)return;if(timerRemaining<=0){timerIndex=0;timerPhase='work';timerRemaining=timerDuration()}if(timerRunning){timerPause();return}timerRunning=true;timerRender();timerInterval=setInterval(()=>{timerRemaining--;if(timerRemaining<=0)timerAdvance();else timerRender()},1000)}
-function timerOpen(){if(!current.blocks.length)return;timerPause();timerIndex=0;timerPhase='work';timerRemaining=timerDuration();timerElapsed=0;$('timer-screen').classList.add('active');$('timer-screen').setAttribute('aria-hidden','false');document.body.classList.add('timer-open');timerRender();timerPlay()}
-function timerClose(){timerPause();$('timer-screen').classList.remove('active');$('timer-screen').setAttribute('aria-hidden','true');document.body.classList.remove('timer-open');if(document.fullscreenElement)document.exitFullscreen?.()}
-$('start-timer').onclick=timerOpen;$('timer-back').onclick=timerClose;$('timer-play').onclick=timerPlay;$('timer-next').onclick=()=>{if(timerIndex<current.blocks.length-1){timerIndex++;timerPhase='work';timerRemaining=timerDuration();timerRender()}};
-$('timer-prev').onclick=()=>{if(timerPhase==='rest'){timerPhase='work';timerRemaining=timerDuration()}else if(timerIndex>0){timerIndex--;timerPhase='work';timerRemaining=timerDuration()}timerRender()};
-$('timer-stop').onclick=()=>{timerPause();timerIndex=0;timerPhase='work';timerRemaining=timerDuration();timerRender()};
-$('timer-fullscreen').onclick=()=>{if(!document.fullscreenElement)$('timer-screen').requestFullscreen?.();else document.exitFullscreen?.()};
+const timer = new TimerController({
+  getBlocks: () => current.blocks
+});
+
+window.addEventListener("beforeunload", () => {
+  saveCurrent(current);
+  saveBank(bank);
+  saveLessons(lessons);
+});
 
 renderAll();

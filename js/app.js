@@ -32,7 +32,7 @@ $('exercise-form').addEventListener('submit',event=>{event.preventDefault();cons
 $('open-add-exercise').onclick=()=>openExercise();$('bank-add').onclick=()=>openExercise();
 $('new-lesson').onclick=()=>{const copy=structuredClone(current);if(!lessons.some(l=>l.id===copy.id))lessons.push(copy);persist();setCurrent(createLesson())};
 $('save-lesson').onclick=()=>{current.name=$('lesson-name').value.trim()||'Minha aula';current.type=$('lesson-type').value;const index=lessons.findIndex(l=>l.id===current.id);if(index>=0)lessons[index]=structuredClone(current);else lessons.push(structuredClone(current));persist();renderLessons();notify('Aula salva')};
-$('lesson-name').onchange=()=>{current.name=$('lesson-name').value.trim()||'Minha aula';persist();renderLessons();renderScript($('script-content'),current)};$('lesson-type').onchange=()=>{current.type=$('lesson-type').value;persist()};
+$('lesson-name').onchange=()=>{current.name=$('lesson-name').value.trim()||'Minha aula';persist();renderLessons();renderScript($('script-content'),current)};
 $('exercise-search').oninput=renderBankPicker;$('builder-muscle').onchange=renderBankPicker;$('bank-search').oninput=renderBank;$('bank-muscle').onchange=()=>{muscleFilter=$('bank-muscle').value;renderBank()};
 $('add-custom').onclick=()=>{try{builder.addCustom($('custom-name').value,normalizeTime($('custom-work').value),normalizeTime($('custom-rest').value));$('custom-name').value='';persist();renderAll();notify('Personalizado adicionado')}catch(error){notify(error.message)}};
 $('clear-selection').onclick=()=>{selected.clear();renderBlocks()};

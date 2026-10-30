@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#09070f">
   <meta name="description" content="Workout Fight — Solo Builder: construtor de aulas e biblioteca de exercícios.">
   <title>Workout Fight — Solo Builder</title>
-  <link rel="stylesheet" href="./css/styles.css?v=solo-fix-20261029-2">
+  <link rel="stylesheet" href="./css/styles.css?v=solo-fix-20261029-3">
 </head>
 <body>
   <div class="app-shell">
@@ -50,7 +50,7 @@
             </div>
           </aside>
           <section class="panel lesson-panel">
-            <div class="panel-head"><div><p class="eyebrow">SUA SEQUÊNCIA</p><h2>Blocos da aula</h2></div><div class="sequence-actions"><span class="muted" id="selection-count">Nenhum selecionado</span><button class="btn btn-primary" id="start-timer" disabled>▶ Iniciar cronômetro</button></div></div>
+            <div class="panel-head"><div><p class="eyebrow">SUA SEQUÊNCIA</p><h2>Blocos da aula</h2></div><div class="sequence-actions"><span class="muted" id="selection-count">Nenhum selecionado</span><button class="btn btn-primary" id="start-timer" disabled><svg class="timer-launch-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l12 7-12 7z"/></svg><span>Iniciar cronômetro</span></button></div></div>
             <div id="bulk-toolbar" class="bulk-toolbar hidden">
               <span>Opções para os selecionados:</span><button class="mini-btn" id="bulk-join">⏱ Juntar no mesmo tempo</button><button class="mini-btn" id="bulk-times">◷ Padronizar tempos</button><button class="mini-btn" id="bulk-group">▦ Organizar em grupo</button><button class="mini-btn" id="bulk-ungroup">Desagrupar selecionados</button>
             </div>
@@ -81,6 +81,6 @@
   </section>
   <dialog id="exercise-dialog" class="modal"><form method="dialog" id="exercise-form"><div class="modal-head"><div><p class="eyebrow">BANCO DE EXERCÍCIOS</p><h2 id="exercise-dialog-title">Novo exercício</h2></div><button class="icon-btn" value="cancel" aria-label="Fechar">×</button></div><input type="hidden" id="edit-exercise-id"><label>Nome<input id="exercise-name" required maxlength="80" placeholder="Nome do exercício"></label><label>Grupamento<input id="exercise-muscle" list="muscle-options" required placeholder="Ex.: Peitoral"><datalist id="muscle-options"></datalist></label><label>Categoria muscular<input id="exercise-category" placeholder="Ex.: Empurrar"></label><div class="modal-actions"><button class="btn btn-quiet" value="cancel">Cancelar</button><button class="btn btn-primary" id="exercise-submit" value="default">Salvar exercício</button></div></form></dialog>
   <dialog id="quick-dialog" class="modal"><form method="dialog" id="quick-form"><div class="modal-head"><div><p class="eyebrow">FERRAMENTA DE EDIÇÃO</p><h2 id="quick-title">Editar</h2></div><button class="icon-btn" value="cancel">×</button></div><div id="quick-fields"></div><div class="modal-actions"><button class="btn btn-quiet" value="cancel">Cancelar</button><button class="btn btn-primary" id="quick-submit" value="default">Aplicar</button></div></form></dialog>
-  <script type="module" src="./js/app.js?v=solo-fix-20261029-2"></script>
+  <script type="module" src="./js/app.js?v=solo-fix-20261029-3"></script>
 </body>
 </html>

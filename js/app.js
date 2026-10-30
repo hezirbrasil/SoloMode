@@ -1,10 +1,9 @@
-import {INITIAL_EXERCISES,MUSCLE_ORDER,mergeExerciseBanks,addExercise,updateExercise,removeExercise} from './exercise-bank.js';
+import {INITIAL_EXERCISES,MUSCLE_ORDER,mergeExerciseBanks,addExercise,updateExercise,removeExercise,searchExercises,canAddExercise} from './exercise-bank.js';
 import {createLesson,LessonBuilder} from './lesson-builder.js';
 import {loadBank,saveBank,loadLessons,saveLessons,loadCurrent,saveCurrent,makeId,normalizeLesson,exportJson,importJson} from './storage.js';
 import {renderScript} from './script-view.js';
 import {TimerController} from './timer-controller.js';
-import {createBankView} from './bank-view.js';
-import {$,seconds,normalizeTime,field} from './dom-utils.js';
+import {$,escapeHTML,seconds,normalizeTime,field} from './dom-utils.js';
 let bank=mergeExerciseBanks(loadBank()||[],INITIAL_EXERCISES),lessons=loadLessons(),current=normalizeLesson(loadCurrent()||createLesson()),builder=new LessonBuilder(current),selected=new Set(),muscleFilter='';
 saveBank(bank);
 
@@ -12,40 +11,81 @@ function persist(){saveBank(bank);saveLessons(lessons);saveCurrent(current);$('s
 function notify(message){$('save-status').textContent=message;setTimeout(()=>{if($('save-status').textContent===message)persist()},2000)}
 function quickDialog(title,fields,onApply){$('quick-title').textContent=title;$('quick-fields').innerHTML=fields.join('');const dialog=$('quick-dialog');dialog.showModal();$('quick-submit').onclick=event=>{event.preventDefault();const values={};$('quick-fields').querySelectorAll('input').forEach(input=>values[input.id]=input.value);try{onApply(values);dialog.close();persist();renderAll()}catch(error){notify(error.message)}}}
 function setCurrent(lesson){current=normalizeLesson(lesson);builder=new LessonBuilder(current);selected.clear();persist();renderAll()}
-function renderSelection(){const count=selected.size,chosen=current.blocks.filter(block=>selected.has(block.id));$('selection-count').textContent=count?count+' selecionado(s)':'Selecione exercícios';$('start-timer').disabled=!current.blocks.length;$('bulk-toolbar').classList.remove('hidden');$('bulk-times').disabled=count<1;$('bulk-join').disabled=count<2;$('bulk-group').disabled=count<2;$('bulk-ungroup').disabled=!chosen.some(block=>block.groupId)}
+function fillMuscles(){const values=[...MUSCLE_ORDER,...new Set(bank.map(item=>item.muscle).filter(m=>!MUSCLE_ORDER.includes(m)))];for(const id of ['builder-muscle','bank-muscle']){const select=$(id),previous=select.value;select.innerHTML='<option value="">Todos os grupamentos</option>'+values.map(v=>'<option>'+escapeHTML(v)+'</option>').join('');select.value=previous}$('muscle-options').innerHTML=values.map(v=>'<option value="'+escapeHTML(v)+'">').join('')}
+function renderBankPicker(){
+ const list=$('builder-exercise-list');
+ const query=$('exercise-search').value;
+ const selectedMuscle=$('builder-muscle').value;
+ const items=searchExercises(bank,{query,muscle:selectedMuscle}).sort((a,b)=>{
+  const muscleOrder=MUSCLE_ORDER.indexOf(a.muscle)-MUSCLE_ORDER.indexOf(b.muscle);
+  return muscleOrder||a.name.localeCompare(b.name,'pt-BR');
+ });
+ list.replaceChildren();
+ if(!items.length){
+  list.innerHTML='<div class="no-results">Nenhum exercício encontrado.</div>';
+  return;
+ }
+ const groups=new Map();
+ items.forEach(item=>{
+  if(!groups.has(item.muscle))groups.set(item.muscle,[]);
+  groups.get(item.muscle).push(item);
+ });
+ groups.forEach((groupItems,muscle)=>{
+  const section=document.createElement('section');
+  section.className='exercise-muscle-group';
+  const heading=document.createElement('h3');
+  heading.className='exercise-muscle-heading';
+  heading.textContent=muscle;
+  const count=document.createElement('span');
+  count.textContent=String(groupItems.length);
+  heading.append(count);
+  section.append(heading);
+  groupItems.forEach(item=>{
+   const used=!canAddExercise(current.blocks,item);
+   const row=document.createElement('div');
+   row.className='exercise-option'+(used?' used':'');
+   const info=document.createElement('div');
+   const name=document.createElement('strong');
+   const sub=document.createElement('small');
+   name.textContent=item.name;
+   sub.textContent=item.category+' · '+item.type;
+   info.append(name,sub);
+   const add=document.createElement('button');
+   add.className='add-exercise';
+   add.textContent=used?'✓':'+';
+   add.title=used?'Já utilizado nesta aula':'Adicionar';
+   add.disabled=used;
+   add.onclick=()=>{
+    try{
+     builder.add(item);
+     persist();
+     renderAll();
+     notify('Exercício adicionado');
+    }catch(error){notify(error.message)}
+   };
+   row.append(info,add);
+   section.append(row);
+  });
+  list.append(section);
+ });
+}function renderSelection(){const count=selected.size,chosen=current.blocks.filter(block=>selected.has(block.id));$('selection-count').textContent=count?count+' selecionado(s)':'Selecione exercícios';$('start-timer').disabled=!current.blocks.length;$('bulk-toolbar').classList.remove('hidden');$('bulk-times').disabled=count<1;$('bulk-join').disabled=count<2;$('bulk-group').disabled=count<2;$('bulk-ungroup').disabled=!chosen.some(block=>block.groupId)}
 function renderBlocks(){const root=$('lesson-blocks');root.innerHTML='';if(!current.blocks.length){root.className='lesson-blocks empty-state';root.innerHTML='<div class="empty-icon">＋</div><h3>Sua aula começa aqui</h3><p>Selecione um exercício na biblioteca para adicionar ao planejamento.</p>';$('lesson-total').textContent='0 blocos';$('lesson-summary').textContent='Adicione exercícios para começar.';renderSelection();return}root.className='lesson-blocks';$('lesson-total').textContent=current.blocks.length+' blocos';$('lesson-summary').textContent=current.blocks.length+' blocos · '+current.blocks.reduce((s,b)=>s+seconds(b.work)+seconds(b.rest),0)+' segundos totais';const groupNodes=new Map();
  current.blocks.forEach((block,index)=>{let target=root;if(block.groupId){if(!groupNodes.has(block.groupId)){const wrap=document.createElement('div');wrap.className='group-wrap';const head=document.createElement('div');head.className='group-head';const title=document.createElement('span');title.textContent=block.groupName||'GRUPO';const rename=document.createElement('button');rename.textContent='Renomear';rename.onclick=()=>quickDialog('Renomear grupo',[field('Nome do grupo',block.groupName||'Grupo','group-name')],v=>builder.renameGroup(block.groupId,v['group-name']));const collapse=document.createElement('button');collapse.textContent=block.collapsed?'Expandir':'Recolher';collapse.onclick=()=>{builder.toggleGroup(block.groupId);persist();renderAll()};head.append(title,rename,collapse);wrap.append(head);root.append(wrap);groupNodes.set(block.groupId,wrap)}target=groupNodes.get(block.groupId);if(block.collapsed)return}
  const card=document.createElement('article');card.className='block-card'+(selected.has(block.id)?' selected':'');const check=document.createElement('input');check.type='checkbox';check.checked=selected.has(block.id);check.onchange=()=>{check.checked?selected.add(block.id):selected.delete(block.id);renderSelection();card.classList.toggle('selected',check.checked)};const ix=document.createElement('span');ix.className='block-index';ix.textContent=String(index+1).padStart(2,'0');const info=document.createElement('div'),name=document.createElement('div'),detail=document.createElement('div');name.className='block-name';name.textContent=block.exercises?block.exercises.map(e=>e.name).join(' + '):block.name;detail.className='block-detail';detail.textContent=(block.muscle||'Personalizado')+' · '+block.work+' execução · '+block.rest+' descanso';info.append(name,detail);const actions=document.createElement('div');actions.className='block-actions';
  const action=(label,fn,title=label)=>{const button=document.createElement('button');button.textContent=label;button.title=title;button.onclick=()=>{fn();persist();renderAll()};actions.append(button)};
  action('Editar',()=>openBlockEditor(block));action('↑',()=>builder.move(block.id,-1),'Mover para cima');action('↓',()=>builder.move(block.id,1),'Mover para baixo');action('Duplicar',()=>builder.duplicate(block.id));action('×',()=>{builder.remove([block.id]);selected.delete(block.id)},'Remover');card.append(check,ix,info,actions);target.append(card)});renderSelection()}
+function renderBank(){const items=searchExercises(bank,{query:$('bank-search').value,muscle:$('bank-muscle').value||muscleFilter}).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR')),root=$('bank-list');root.innerHTML='';if(!items.length)root.innerHTML='<div class="no-results">Nenhum exercício encontrado.</div>';items.forEach(item=>{const card=document.createElement('div');card.className='bank-card';const name=document.createElement('strong'),sub=document.createElement('small'),actions=document.createElement('div');name.textContent=item.name;sub.textContent=item.muscle+' · '+item.category+' · '+item.type;actions.className='card-actions';const edit=document.createElement('button');edit.textContent='Editar';edit.onclick=()=>openExercise(item);const del=document.createElement('button');del.textContent='Excluir';del.onclick=()=>{bank=removeExercise(bank,item.id);persist();renderAll()};actions.append(edit,del);card.append(name,sub,actions);root.append(card)});
+ const index=$('muscle-index');index.innerHTML='';const all=document.createElement('button');all.className='muscle-chip'+(!muscleFilter?' active':'');all.textContent='Todos';all.onclick=()=>{muscleFilter='';$('bank-muscle').value='';renderBank()};index.append(all);[...MUSCLE_ORDER.filter(m=>bank.some(i=>i.muscle===m)),...new Set(bank.map(i=>i.muscle).filter(m=>!MUSCLE_ORDER.includes(m)))].forEach(muscle=>{const b=document.createElement('button');b.className='muscle-chip'+(muscleFilter===muscle?' active':'');b.textContent=muscle;b.onclick=()=>{muscleFilter=muscle;$('bank-muscle').value=muscle;renderBank()};index.append(b)});$('bank-count').textContent=bank.length}
 function renderLessons(){const root=$('saved-lessons');root.innerHTML='';if(!lessons.length){root.innerHTML='<div class="no-results">Nenhuma aula salva ainda. Use “Salvar aula” no topo.</div>';return}lessons.forEach(lesson=>{const card=document.createElement('div');card.className='saved-card';const title=document.createElement('strong'),sub=document.createElement('small'),actions=document.createElement('div');title.textContent=lesson.name;sub.textContent=lesson.blocks.length+' blocos';actions.className='card-actions';const addAction=(label,fn)=>{const button=document.createElement('button');button.textContent=label;button.onclick=fn;actions.append(button)};addAction('Abrir',()=>setCurrent(lesson));addAction('Duplicar',()=>{const copy=structuredClone(lesson);copy.id=makeId();copy.name+=' (cópia)';lessons.push(copy);persist();renderLessons()});addAction('Renomear',()=>quickDialog('Renomear aula',[field('Nome',lesson.name,'saved-name')],v=>{lesson.name=v['saved-name'].trim()||lesson.name;persist();renderLessons()}));addAction('Excluir',()=>{lessons=lessons.filter(l=>l.id!==lesson.id);persist();renderLessons()});card.append(title,sub,actions);root.append(card)})}
 function openExercise(item=null){$('exercise-dialog-title').textContent=item?'Editar exercício':'Novo exercício';$('edit-exercise-id').value=item?.id||'';$('exercise-name').value=item?.name||'';$('exercise-muscle').value=item?.muscle||'';$('exercise-category').value=item?.category||'';$('exercise-dialog').showModal()}
 function openBlockEditor(block){$('quick-title').textContent='Editar bloco';$('quick-fields').innerHTML=field('Nome',block.name,'block-name')+field('Execução (MM:SS)',block.work,'block-work')+field('Descanso (MM:SS)',block.rest,'block-rest');const dialog=$('quick-dialog');dialog.showModal();$('quick-submit').onclick=event=>{event.preventDefault();const name=$('block-name').value.trim();if(!name){notify('Informe o nome do exercício.');return}builder.edit(block.id,{name,work:normalizeTime($('block-work').value),rest:normalizeTime($('block-rest').value)});dialog.close();persist();renderAll()}}
-const bankView = createBankView({
-  getBank: () => bank,
-  getBlocks: () => current.blocks,
-  getBuilder: () => builder,
-  getMuscleFilter: () => muscleFilter,
-  setMuscleFilter: (value) => { muscleFilter = value; },
-  muscleOrder: MUSCLE_ORDER,
-  persist,
-  renderAll,
-  notify,
-  openExercise,
-  removeExercise: (id) => {
-    bank = removeExercise(bank, id);
-    persist();
-    renderAll();
-  }
-});
-
-function renderAll(){$('lesson-name').value=current.name;bankView.fillMuscles();bankView.renderPicker();renderBlocks();bankView.renderBank();renderLessons();renderScript($('script-content'),current)}
+function renderAll(){$('lesson-name').value=current.name;fillMuscles();renderBankPicker();renderBlocks();renderBank();renderLessons();renderScript($('script-content'),current)}
 $('exercise-form').addEventListener('submit',event=>{event.preventDefault();const data={name:$('exercise-name').value,muscle:$('exercise-muscle').value,category:$('exercise-category').value};try{bank=$('edit-exercise-id').value?updateExercise(bank,$('edit-exercise-id').value,data):addExercise(bank,data);$('exercise-dialog').close();persist();renderAll();notify('Banco atualizado')}catch(error){notify(error.message)}});
 $('open-add-exercise').onclick=()=>openExercise();$('bank-add').onclick=()=>openExercise();
 $('new-lesson').onclick=()=>{const copy=structuredClone(current);if(!lessons.some(l=>l.id===copy.id))lessons.push(copy);persist();setCurrent(createLesson())};
 $('save-lesson').onclick=()=>{current.name=$('lesson-name').value.trim()||'Minha aula';const index=lessons.findIndex(l=>l.id===current.id);if(index>=0)lessons[index]=structuredClone(current);else lessons.push(structuredClone(current));persist();renderLessons();notify('Aula salva')};
 $('lesson-name').onchange=()=>{current.name=$('lesson-name').value.trim()||'Minha aula';persist();renderLessons();renderScript($('script-content'),current)};
-$('exercise-search').oninput=bankView.renderPicker;$('builder-muscle').onchange=bankView.renderPicker;$('bank-search').oninput=bankView.renderBank;$('bank-muscle').onchange=()=>{muscleFilter=$('bank-muscle').value;bankView.renderBank()};
+$('exercise-search').oninput=renderBankPicker;$('builder-muscle').onchange=renderBankPicker;$('bank-search').oninput=renderBank;$('bank-muscle').onchange=()=>{muscleFilter=$('bank-muscle').value;renderBank()};
 $('add-custom').onclick=()=>{try{builder.addCustom($('custom-name').value,normalizeTime($('custom-work').value),normalizeTime($('custom-rest').value));$('custom-name').value='';persist();renderAll();notify('Personalizado adicionado')}catch(error){notify(error.message)}};
 $('clear-selection').onclick=()=>{selected.clear();renderBlocks()};
 $('bulk-times').onclick=()=>quickDialog('Padronizar tempos',[field('Execução (MM:SS)','00:50','bulk-work'),field('Descanso (MM:SS)','00:10','bulk-rest')],v=>builder.times([...selected],normalizeTime(v['bulk-work']),normalizeTime(v['bulk-rest'])));

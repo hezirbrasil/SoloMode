@@ -4,7 +4,7 @@ import {updateBlock,moveBlock,duplicateBlock,removeBlocks,applyTimes,createGroup
 export function createLesson(type='Full Body'){return {id:makeId(),name:'Minha aula',type,blocks:[],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()}}
 export class LessonBuilder{
  constructor(lesson){this.lesson=lesson}
- add(exercise,work,rest){if(!canAddExercise(this.lesson.blocks,exercise))throw new Error('Este exercício já foi usado nesta aula. Para adicionar, remova o bloco existente.');this.lesson.blocks.push(makeExerciseBlock(exercise,work,rest));this.touch()}
+ add(exercise,work='00:50',rest='00:10'){if(!canAddExercise(this.lesson.blocks,exercise))throw new Error(/^Stiff unilateral [ED]$/.test(exercise.name)?'Inclua os dois lados do Stiff unilateral (E e D) para completar o movimento.':'Este exercício já foi usado nesta aula. Para adicionar, remova o bloco existente.');this.lesson.blocks.push(makeExerciseBlock(exercise,work,rest));this.touch()}
  addCustom(name,work,rest){const clean=name.trim();if(!clean)throw new Error('Informe o nome do exercício.');if(this.lesson.blocks.some(b=>b.name.toLocaleLowerCase('pt-BR')===clean.toLocaleLowerCase('pt-BR')))throw new Error('Este exercício já existe nesta aula.');this.lesson.blocks.push(makeExerciseBlock({name:clean,muscle:'Personalizado',category:'Personalizado'},work,rest));this.touch()}
  edit(id,patch){this.lesson.blocks=updateBlock(this.lesson.blocks,id,patch);this.touch()}
  move(id,direction){this.lesson.blocks=moveBlock(this.lesson.blocks,id,direction);this.touch()}

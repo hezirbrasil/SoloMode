@@ -1,10 +1,10 @@
-import {INITIAL_EXERCISES,MUSCLE_ORDER,mergeExerciseBanks,addExercise,updateExercise,removeExercise,searchExercises,canAddExercise} from './exercise-bank.js';
+import {INITIAL_EXERCISES,MUSCLE_ORDER,mergeExerciseBanks,addExercise,updateExercise,removeExercise} from './exercise-bank.js';
 import {createLesson,LessonBuilder} from './lesson-builder.js';
 import {loadBank,saveBank,loadLessons,saveLessons,loadCurrent,saveCurrent,makeId,normalizeLesson,exportJson,importJson} from './storage.js';
 import {renderScript} from './script-view.js';
 import {TimerController} from './timer-controller.js';
 import {createBankView} from './bank-view.js';
-import {$,escapeHTML,seconds,normalizeTime,field} from './dom-utils.js';
+import {$,seconds,normalizeTime,field} from './dom-utils.js';
 let bank=mergeExerciseBanks(loadBank()||[],INITIAL_EXERCISES),lessons=loadLessons(),current=normalizeLesson(loadCurrent()||createLesson()),builder=new LessonBuilder(current),selected=new Set(),muscleFilter='';
 saveBank(bank);
 

@@ -59,7 +59,7 @@ function timerRender(){
  $('timer-progress-fill').style.width=(total?Math.min(100,elapsed/total*100):0)+'%';
  const list=$('timer-exercise-list');list.innerHTML='';
  current.blocks.slice(timerIndex,timerIndex+3).forEach((item,i)=>{const row=document.createElement('div');row.className='timer-exercise'+(i===0?' active':'');const name=document.createElement('strong');name.textContent=timerLabel(item);row.append(name);list.append(row)});
- $('timer-play').textContent=timerRunning?'Ⅱ':'▶';$('timer-play').setAttribute('aria-label',timerRunning?'Pausar':'Iniciar');
+ $('timer-play').innerHTML=timerRunning?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>';$('timer-play').setAttribute('aria-label',timerRunning?'Pausar':'Iniciar');
  $('start-timer').disabled=!current.blocks.length;
 }
 function timerAdvance(){

@@ -73,3 +73,61 @@ body.timer-open{overflow:hidden}
  .timer-control{font-size:30px;min-width:36px}
  .timer-control.timer-play{width:94px;height:94px;font-size:42px}
 }
+
+
+/* SOLO — timer refinado: círculo proporcional, exercícios sem sobreposição */
+.timer-screen{
+  min-height:100dvh;height:100dvh;overflow:hidden;
+  padding:16px 24px 18px;
+  grid-template-rows:auto minmax(0,1fr) auto auto auto;
+  gap:12px;
+  background:radial-gradient(ellipse at 50% 38%,#160a25 0%,#08050d 52%,#030205 100%);
+}
+.timer-top{grid-template-columns:58px minmax(120px,620px) 58px;justify-content:space-between;gap:14px}
+.timer-icon{width:48px;height:48px;border:1px solid #7836a5;border-radius:14px;background:#140b20;color:#d9a5ff;font-size:27px;box-shadow:0 0 16px #8e21e51c}
+.timer-progress{height:7px;background:#241333}
+.timer-progress span{background:linear-gradient(90deg,#8d36c7,#d08aff);box-shadow:0 0 12px #a84de9}
+.timer-clock-wrap{min-height:0;display:grid;place-items:center;overflow:visible}
+.timer-ring{
+  width:min(39vh,430px,42vw);
+  max-width:430px;
+  background:conic-gradient(from -90deg,#b45be8 0 var(--ring-progress),#321b43 var(--ring-progress) 100%);
+  filter:drop-shadow(0 0 15px #9b22e92b);
+}
+.timer-ring:before{inset:12px;background:radial-gradient(circle at 50% 35%,#11091a,#07040b 75%)}
+.timer-clock{font-size:clamp(76px,8.5vh,118px);color:#f7eaff;letter-spacing:-.055em}
+.timer-exercise-list{width:min(100%,850px);gap:8px}
+.timer-exercise{
+  min-height:62px;padding:9px 16px;gap:16px;border:1px solid #633487;border-radius:13px;
+  background:linear-gradient(100deg,#130b1c,#0b0710);box-shadow:none
+}
+.timer-exercise.active{border-color:#bd70ed;background:linear-gradient(100deg,#21102f,#100919);box-shadow:0 0 15px #a34be722}
+.timer-exercise-number{width:42px;height:42px;flex-basis:42px;border-radius:10px;background:#29133b;color:#d6a0fa;font-size:20px}
+.timer-exercise strong{font-size:clamp(16px,2.1vh,23px);color:#f2e6fb}
+.timer-controls{gap:clamp(22px,4vw,54px);padding:0}
+.timer-control{min-width:42px;min-height:46px;font-size:30px;color:#d8b4f3}
+.timer-control.timer-play{width:76px;height:76px;font-size:34px;background:linear-gradient(145deg,#bd70e9,#762bb0);color:#100817;box-shadow:0 0 22px #a34be944}
+.timer-phase{font-size:10px;letter-spacing:.2em;color:#c58be9}
+@media(max-width:650px){
+ .timer-screen{height:100dvh;min-height:100dvh;padding:12px 12px 15px;gap:10px;grid-template-rows:auto minmax(0,1fr) auto auto auto}
+ .timer-top{grid-template-columns:44px minmax(80px,1fr) 44px;gap:8px}
+ .timer-icon{width:40px;height:40px;border-radius:12px;font-size:23px}
+ .timer-ring{width:min(34vh,72vw);max-width:300px}
+ .timer-ring:before{inset:9px}
+ .timer-clock{font-size:clamp(62px,10vh,88px)}
+ .timer-exercise-list{gap:7px}
+ .timer-exercise{min-height:58px;padding:8px 10px;gap:10px;border-radius:11px}
+ .timer-exercise-number{width:36px;height:36px;flex-basis:36px;font-size:17px}
+ .timer-exercise strong{font-size:clamp(14px,3.8vw,19px)}
+ .timer-controls{gap:clamp(14px,5vw,28px)}
+ .timer-control{font-size:25px;min-width:32px}
+ .timer-control.timer-play{width:66px;height:66px;font-size:30px}
+ .timer-phase{font-size:9px}
+}
+@media(max-height:700px) and (min-width:651px){
+ .timer-screen{gap:7px;padding-top:10px;padding-bottom:10px}
+ .timer-ring{width:min(32vh,350px,36vw)}
+ .timer-exercise{min-height:52px;padding:6px 12px}
+ .timer-exercise-number{width:36px;height:36px;flex-basis:36px;font-size:17px}
+ .timer-control.timer-play{width:62px;height:62px}
+}

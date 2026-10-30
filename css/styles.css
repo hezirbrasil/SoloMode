@@ -275,3 +275,46 @@ body.timer-open{overflow:hidden}
 /* Ícone vetorial do botão de iniciar no construtor Solo */
 #start-timer{display:inline-flex;align-items:center;justify-content:center;gap:8px}
 #start-timer .timer-launch-icon{width:14px;height:14px;display:block;fill:currentColor;stroke:none;flex:0 0 auto}
+
+
+/* SOLO Builder — mobile card grid repair + black/purple/white palette */
+:root{
+ --bg:#050308;--panel:#0b0711;--panel2:#12091c;
+ --line:#382052;--purple:#9b35e8;--neon:#bd65ff;
+ --lilac:#e4c8ff;--text:#ffffff;--muted:#c4b5d2;--soft:#9b8ba9;
+}
+body{background:#050308;color:#fff}
+.panel{background:#0b0711;border-color:#382052}
+.exercise-option,.block-card,.bank-card,.saved-card{background:#100a18;border-color:#382052}
+.block-card.selected,.exercise-option:hover{background:#1a0d29;border-color:#a64be8}
+.block-name,.exercise-option strong,.bank-card strong,.saved-card strong{color:#fff}
+.block-detail,.exercise-option small,.muted,.subhead{color:#c4b5d2}
+.bulk-toolbar{background:#12091c;border-color:#67358b;color:#e4c8ff}
+.mini-btn,.block-actions button{background:#170d22;border-color:#563477;color:#f0ddff}
+.btn-primary{background:#8e2bd0;color:#fff}
+.btn-quiet{background:#100a18;border-color:#49305f;color:#fff}
+.total-pill{background:#1a0d29;border-color:#74429b;color:#e4c8ff}
+@media(max-width:650px){
+ .lesson-panel .panel-head{display:flex;flex-direction:column;align-items:stretch;gap:9px}
+ .lesson-panel .panel-head>div:first-child{width:100%}
+ .lesson-panel .sequence-actions{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
+ .bulk-toolbar{position:static!important;top:auto;box-shadow:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .bulk-toolbar>span{grid-column:1/-1;width:auto}
+ .bulk-toolbar .mini-btn{width:100%;min-width:0;white-space:normal;line-height:1.2;min-height:42px}
+ .block-card{
+  display:grid!important;
+  grid-template-columns:20px 30px minmax(0,1fr)!important;
+  align-items:start;gap:8px;padding:11px!important;
+ }
+ .block-card>input[type=checkbox]{grid-column:1;grid-row:1;width:18px;height:18px;margin:2px 0 0}
+ .block-card>.block-index{grid-column:2;grid-row:1;padding-top:2px}
+ .block-card>div:not(.block-actions){grid-column:3;grid-row:1;min-width:0;width:100%}
+ .block-card .block-name{white-space:normal;overflow-wrap:break-word;word-break:normal;line-height:1.35;font-size:13px}
+ .block-card .block-detail{white-space:normal;overflow-wrap:break-word;word-break:normal;line-height:1.45;margin-top:5px}
+ .block-card .block-actions{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;width:100%;min-width:0}
+ .block-card .block-actions button{min-width:0;width:100%;min-height:38px;padding:7px 2px;font-size:10px;white-space:nowrap}
+ .group-wrap{min-width:0}
+ .group-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+ .lesson-footer{color:#c4b5d2}
+ .lesson-footer .btn{color:#fff}
+}

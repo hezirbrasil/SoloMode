@@ -3,16 +3,12 @@ import {createLesson,LessonBuilder} from './lesson-builder.js';
 import {loadBank,saveBank,loadLessons,saveLessons,loadCurrent,saveCurrent,makeId,normalizeLesson,exportJson,importJson} from './storage.js';
 import {renderScript} from './script-view.js';
 import {TimerController} from './timer-controller.js';
-const $=id=>document.getElementById(id);
+import {$,escapeHTML,seconds,normalizeTime,field} from './dom-utils.js';
 let bank=mergeExerciseBanks(loadBank()||[],INITIAL_EXERCISES),lessons=loadLessons(),current=normalizeLesson(loadCurrent()||createLesson()),builder=new LessonBuilder(current),selected=new Set(),muscleFilter='';
 saveBank(bank);
 
 function persist(){saveBank(bank);saveLessons(lessons);saveCurrent(current);$('save-status').textContent='Salvo localmente'}
 function notify(message){$('save-status').textContent=message;setTimeout(()=>{if($('save-status').textContent===message)persist()},2000)}
-function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function seconds(value){const p=String(value||'0:0').split(':').map(Number);return (p[0]||0)*60+(p[1]||0)}
-function normalizeTime(value){const p=String(value||'00:00').trim().split(':').map(v=>Math.max(0,Number(v)||0));if(p.length===1)return '00:'+String(p[0]).padStart(2,'0');return String(p[p.length-2]).padStart(2,'0')+':'+String(p[p.length-1]).padStart(2,'0')}
-function field(label,value,id){return '<label class="inline-field">'+escapeHTML(label)+'<input id="'+id+'" value="'+escapeHTML(value)+'"></label>'}
 function quickDialog(title,fields,onApply){$('quick-title').textContent=title;$('quick-fields').innerHTML=fields.join('');const dialog=$('quick-dialog');dialog.showModal();$('quick-submit').onclick=event=>{event.preventDefault();const values={};$('quick-fields').querySelectorAll('input').forEach(input=>values[input.id]=input.value);try{onApply(values);dialog.close();persist();renderAll()}catch(error){notify(error.message)}}}
 function setCurrent(lesson){current=normalizeLesson(lesson);builder=new LessonBuilder(current);selected.clear();persist();renderAll()}
 function fillMuscles(){const values=[...MUSCLE_ORDER,...new Set(bank.map(item=>item.muscle).filter(m=>!MUSCLE_ORDER.includes(m)))];for(const id of ['builder-muscle','bank-muscle']){const select=$(id),previous=select.value;select.innerHTML='<option value="">Todos os grupamentos</option>'+values.map(v=>'<option>'+escapeHTML(v)+'</option>').join('');select.value=previous}$('muscle-options').innerHTML=values.map(v=>'<option value="'+escapeHTML(v)+'">').join('')}

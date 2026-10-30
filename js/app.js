@@ -45,7 +45,6 @@ $('bulk-ungroup').onclick=()=>{builder.ungroup([...selected]);selected.clear();p
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===tab));document.querySelectorAll('.view').forEach(view=>view.classList.toggle('active',view.id==='view-'+tab.dataset.view));if(tab.dataset.view==='script')renderScript($('script-content'),current)});
 $('print-script').onclick=()=>window.print();$('export-lesson').onclick=()=>exportJson((current.name||'aula').toLowerCase().replace(/[^a-z0-9-]+/g,'-')+'.json',{format:'workout-fight-solo',version:1,lesson:current,bank});
 $('import-lesson').onchange=async event=>{const file=event.target.files?.[0];if(!file)return;try{const data=await importJson(file),lesson=normalizeLesson(data.lesson||data);if(!Array.isArray(lesson.blocks))throw new Error('Estrutura de aula inválida.');if(Array.isArray(data.bank)){bank=mergeExerciseBanks([...bank,...data.bank],[])}setCurrent(lesson);notify('Aula importada')}catch(error){notify(error.message)}event.target.value=''};
-window.addEventListener('beforeunload',()=>{saveCurrent(current);saveBank(bank);saveLessons(lessons)});
 const timer = new TimerController({
   getBlocks: () => current.blocks
 });

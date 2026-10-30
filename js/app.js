@@ -58,7 +58,7 @@ function timerRender(){
  const elapsed=current.blocks.slice(0,timerIndex).reduce((sum,b)=>sum+seconds(b.work)+seconds(b.rest),0)+(timerPhase==='rest'?seconds(block.work):0)+(duration-timerRemaining);
  $('timer-progress-fill').style.width=(total?Math.min(100,elapsed/total*100):0)+'%';
  const list=$('timer-exercise-list');list.innerHTML='';
- current.blocks.slice(timerIndex,timerIndex+3).forEach((item,i)=>{const row=document.createElement('div');row.className='timer-exercise'+(i===0?' active':'');const num=document.createElement('span');num.className='timer-exercise-number';num.textContent=String(timerIndex+i+1).padStart(2,'0');const name=document.createElement('strong');name.textContent=timerLabel(item);row.append(num,name);list.append(row)});
+ current.blocks.slice(timerIndex,timerIndex+3).forEach((item,i)=>{const row=document.createElement('div');row.className='timer-exercise'+(i===0?' active':'');const name=document.createElement('strong');name.textContent=timerLabel(item);row.append(name);list.append(row)});
  $('timer-play').textContent=timerRunning?'Ⅱ':'▶';$('timer-play').setAttribute('aria-label',timerRunning?'Pausar':'Iniciar');
  $('start-timer').disabled=!current.blocks.length;
 }

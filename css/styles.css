@@ -32,3 +32,44 @@
 footer{margin-top:20px;padding:14px 0}
 @media(max-width:900px){.app-shell{padding:0 16px}.workspace{grid-template-columns:minmax(245px,290px) minmax(0,1fr);gap:10px}.panel{padding:12px}}
 @media(max-width:650px){.app-shell{padding:0 10px}.topbar{height:62px}.hero{padding:17px 0 12px}.hero h1{font-size:29px}.tabs{margin-bottom:10px}.tab{padding:10px 9px}.workspace{grid-template-columns:1fr;gap:10px}.library-panel{order:1}.lesson-panel{order:0;min-height:0}.panel{padding:12px}.exercise-list{max-height:230px}.lesson-blocks{min-height:0}.block-card{padding:8px}.bulk-toolbar{gap:5px}.mini-btn{font-size:9px;padding:6px 7px}}
+
+
+/* Full-screen neon workout timer */
+.sequence-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sequence-actions .btn{white-space:nowrap}
+.timer-screen{display:none;position:fixed;inset:0;z-index:1000;background:#030205;color:#f8efff;padding:22px 22px 28px;overflow:auto;grid-template-rows:auto minmax(250px,1fr) auto auto auto;gap:22px}
+.timer-screen.active{display:grid}
+body.timer-open{overflow:hidden}
+.timer-top{display:grid;grid-template-columns:112px 1fr 112px;align-items:center;gap:16px}
+.timer-icon{height:76px;width:76px;border:2px solid #7d20d5;border-radius:22px;background:#10071c;color:#f5e8ff;font-size:42px;display:grid;place-items:center;box-shadow:0 0 18px #8e21e533}
+.timer-progress{height:12px;background:#321052;border-radius:99px;overflow:hidden}
+.timer-progress span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b52cff,#7924df);box-shadow:0 0 16px #b52cff;transition:width .25s linear}
+.timer-clock-wrap{display:grid;place-items:center;min-height:260px}
+.timer-ring{--ring-progress:100%;width:min(66vw, min(66vh,620px));aspect-ratio:1;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(from -90deg,#a91fff 0 var(--ring-progress),#35105a var(--ring-progress) 100%);filter:drop-shadow(0 0 18px #9b22e955)}
+.timer-ring:before{content:"";position:absolute;inset:15px;border-radius:50%;background:#050307}
+.timer-clock{position:relative;z-index:1;font-family:'Space Grotesk',sans-serif;font-size:clamp(76px,13vw,180px);font-weight:700;letter-spacing:-.065em;line-height:1;color:#fff8ff;font-variant-numeric:tabular-nums}
+.timer-exercise-list{display:grid;gap:12px;width:min(100%,1000px);margin:0 auto}
+.timer-exercise{min-height:88px;border:2px solid #8421df;border-radius:22px;padding:14px 22px;display:flex;align-items:center;gap:24px;background:linear-gradient(100deg,#100818,#08050b);box-shadow:0 0 14px #8c22dd18}
+.timer-exercise.active{border-color:#b22cff;box-shadow:0 0 20px #a523ef32}
+.timer-exercise-number{width:64px;height:64px;flex:0 0 64px;border-radius:15px;background:#260b43;color:#d36aff;display:grid;place-items:center;font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+.timer-exercise strong{font-size:clamp(18px,2.8vw,34px);line-height:1.15}
+.timer-controls{display:flex;align-items:center;justify-content:center;gap:clamp(22px,6vw,72px);padding:8px 0}
+.timer-control{border:0;background:transparent;color:#f5eaff;font-size:42px;min-width:48px;min-height:58px;display:grid;place-items:center;cursor:pointer}
+.timer-control.timer-play{width:132px;height:132px;border-radius:50%;background:linear-gradient(145deg,#c42cff,#7621dc);color:#09020f;font-size:58px;box-shadow:0 0 30px #a523ef66}
+.timer-phase{text-align:center;color:#c76aff;font-size:12px;letter-spacing:.22em;font-weight:800}
+@media(max-width:650px){
+ .sequence-actions{gap:8px}.sequence-actions .btn{font-size:12px;padding:9px 11px}
+ .timer-screen{padding:14px 14px 20px;gap:14px;grid-template-rows:auto minmax(190px,1fr) auto auto auto}
+ .timer-top{grid-template-columns:62px 1fr 62px;gap:10px}
+ .timer-icon{width:54px;height:54px;border-radius:16px;font-size:32px}
+ .timer-progress{height:9px}
+ .timer-ring{width:min(78vw,48vh)}
+ .timer-ring:before{inset:10px}
+ .timer-clock{font-size:clamp(64px,17vw,112px)}
+ .timer-exercise{min-height:72px;padding:10px 12px;gap:14px;border-radius:17px}
+ .timer-exercise-number{width:52px;height:52px;flex-basis:52px;font-size:24px;border-radius:12px}
+ .timer-exercise strong{font-size:clamp(16px,4.2vw,23px)}
+ .timer-controls{gap:clamp(16px,5vw,36px)}
+ .timer-control{font-size:30px;min-width:36px}
+ .timer-control.timer-play{width:94px;height:94px;font-size:42px}
+}

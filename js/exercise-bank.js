@@ -96,7 +96,7 @@ const ALIASES={
  'abdominalsupacomrotacao':'Abdominal Supra + Rotação de Tronco'
 };
 export const normalizeExerciseKey=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR').replace(/[^a-z0-9]/g,'');
-export function canonicalExerciseName(name){const key=normalizeExerciseKey(name);return ALIASES[key]||String(name||'').trim().replace(/\\s+/g,' ')}
+export function canonicalExerciseName(name){const key=normalizeExerciseKey(name);return ALIASES[key]||String(name||'').trim()}
 export const MUSCLE_ORDER=["Peito","Costas","Ombros","Bíceps e tríceps","Inferiores","Core e abdômen","Cardio e funcional"];
 export const INITIAL_EXERCISES=BASE.map(([name,muscle,category])=>({id:makeId(),name,muscle,category,type:'Full Body',available:true,custom:false}));
 export const muscles=[...MUSCLE_ORDER];

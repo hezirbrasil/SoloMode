@@ -50,7 +50,7 @@
             </div>
           </aside>
           <section class="panel lesson-panel">
-            <div class="panel-head"><div><p class="eyebrow">SUA SEQUÊNCIA</p><h2>Blocos da aula</h2></div><span class="muted" id="selection-count">Nenhum selecionado</span></div>
+            <div class="panel-head"><div><p class="eyebrow">SUA SEQUÊNCIA</p><h2>Blocos da aula</h2></div><div class="sequence-actions"><span class="muted" id="selection-count">Nenhum selecionado</span><button class="btn btn-primary" id="start-timer" disabled>▶ Iniciar cronômetro</button></div></div>
             <div id="bulk-toolbar" class="bulk-toolbar hidden">
               <span>Opções para os selecionados:</span><button class="mini-btn" id="bulk-join">⏱ Juntar no mesmo tempo</button><button class="mini-btn" id="bulk-times">◷ Padronizar tempos</button><button class="mini-btn" id="bulk-group">▦ Organizar em grupo</button><button class="mini-btn" id="bulk-ungroup">Desagrupar selecionados</button>
             </div>
@@ -72,6 +72,13 @@
     </main>
     <footer>WORKOUT FIGHT <span>•</span> SOLO BUILDER <span class="footer-right">Seus treinos, sua organização.</span></footer>
   </div>
+  <section id="timer-screen" class="timer-screen" aria-hidden="true">
+    <div class="timer-top"><button class="timer-icon" id="timer-back" aria-label="Voltar">←</button><div class="timer-progress"><span id="timer-progress-fill"></span></div><button class="timer-icon" id="timer-fullscreen" aria-label="Tela cheia">⛶</button></div>
+    <div class="timer-clock-wrap"><div class="timer-ring" id="timer-ring"><div class="timer-clock" id="timer-clock">00:50</div></div></div>
+    <div class="timer-exercise-list" id="timer-exercise-list"></div>
+    <div class="timer-controls"><button class="timer-control" id="timer-prev" aria-label="Anterior">|◀</button><button class="timer-control timer-play" id="timer-play" aria-label="Iniciar">▶</button><button class="timer-control" id="timer-stop" aria-label="Parar">■</button><button class="timer-control" id="timer-next" aria-label="Próximo">▶|</button></div>
+    <div class="timer-phase" id="timer-phase">EXECUÇÃO</div>
+  </section>
   <dialog id="exercise-dialog" class="modal"><form method="dialog" id="exercise-form"><div class="modal-head"><div><p class="eyebrow">BANCO DE EXERCÍCIOS</p><h2 id="exercise-dialog-title">Novo exercício</h2></div><button class="icon-btn" value="cancel" aria-label="Fechar">×</button></div><input type="hidden" id="edit-exercise-id"><label>Nome<input id="exercise-name" required maxlength="80" placeholder="Nome do exercício"></label><label>Grupamento<input id="exercise-muscle" list="muscle-options" required placeholder="Ex.: Peitoral"><datalist id="muscle-options"></datalist></label><label>Categoria muscular<input id="exercise-category" placeholder="Ex.: Empurrar"></label><div class="modal-actions"><button class="btn btn-quiet" value="cancel">Cancelar</button><button class="btn btn-primary" id="exercise-submit" value="default">Salvar exercício</button></div></form></dialog>
   <dialog id="quick-dialog" class="modal"><form method="dialog" id="quick-form"><div class="modal-head"><div><p class="eyebrow">FERRAMENTA DE EDIÇÃO</p><h2 id="quick-title">Editar</h2></div><button class="icon-btn" value="cancel">×</button></div><div id="quick-fields"></div><div class="modal-actions"><button class="btn btn-quiet" value="cancel">Cancelar</button><button class="btn btn-primary" id="quick-submit" value="default">Aplicar</button></div></form></dialog>
   <script type="module" src="./js/app.js"></script>

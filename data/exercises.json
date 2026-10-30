@@ -214,5 +214,509 @@
     "category": "Cardio",
     "type": "Full Body",
     "available": true
+  },
+  {
+    "id": "ex-mma-001",
+    "name": "Supino Pegada Fechada",
+    "muscle": "Peito",
+    "category": "Força",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-002",
+    "name": "Flexão + Feet Touch",
+    "muscle": "Peito",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-003",
+    "name": "Remada Alta",
+    "muscle": "Costas",
+    "category": "Puxar",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-004",
+    "name": "Remada Unilateral E",
+    "muscle": "Costas",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-005",
+    "name": "Remada Unilateral D",
+    "muscle": "Costas",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-006",
+    "name": "Desenvolvimento Arnold",
+    "muscle": "Ombros",
+    "category": "Empurrar",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-007",
+    "name": "Elevação Lateral + Elevação Frontal",
+    "muscle": "Ombros",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-008",
+    "name": "Bíceps",
+    "muscle": "Bíceps e tríceps",
+    "category": "Bíceps",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-009",
+    "name": "Recuo + Bíceps",
+    "muscle": "Bíceps e tríceps",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-010",
+    "name": "Tríceps Francês",
+    "muscle": "Bíceps e tríceps",
+    "category": "Tríceps",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-011",
+    "name": "Tríceps Coice E",
+    "muscle": "Bíceps e tríceps",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-012",
+    "name": "Tríceps Coice D",
+    "muscle": "Bíceps e tríceps",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-013",
+    "name": "Agachamento Goblet",
+    "muscle": "Inferiores",
+    "category": "Agachamento",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-014",
+    "name": "Agachamento Lateral",
+    "muscle": "Inferiores",
+    "category": "Agachamento",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-015",
+    "name": "Agachamento + Rotação",
+    "muscle": "Inferiores",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-016",
+    "name": "Agachamento + Touch Down",
+    "muscle": "Inferiores",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-017",
+    "name": "Agachamento + Troca de Base",
+    "muscle": "Inferiores",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-018",
+    "name": "Agachamento + Abre e Fecha Tocando o Solo",
+    "muscle": "Inferiores",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-019",
+    "name": "Agachamento + Pico de Contração + Salto",
+    "muscle": "Inferiores",
+    "category": "Pliometria",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-020",
+    "name": "Agachamento + Salto",
+    "muscle": "Inferiores",
+    "category": "Pliometria",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-021",
+    "name": "Agachamento + Remada Alta",
+    "muscle": "Inferiores",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-022",
+    "name": "Agachamento + Desenvolvimento",
+    "muscle": "Inferiores",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-023",
+    "name": "Agachamento + Panturrilha",
+    "muscle": "Inferiores",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-024",
+    "name": "Avanço",
+    "muscle": "Inferiores",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-025",
+    "name": "Avanço + Elevação Lateral",
+    "muscle": "Inferiores",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-026",
+    "name": "Afundo E",
+    "muscle": "Inferiores",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-027",
+    "name": "Afundo D",
+    "muscle": "Inferiores",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-028",
+    "name": "Afundo + Salto",
+    "muscle": "Inferiores",
+    "category": "Pliometria",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-029",
+    "name": "Afundo + Troca de Base",
+    "muscle": "Inferiores",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-030",
+    "name": "Búlgaro E",
+    "muscle": "Inferiores",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-031",
+    "name": "Búlgaro D",
+    "muscle": "Inferiores",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-032",
+    "name": "Stiff",
+    "muscle": "Inferiores",
+    "category": "Posterior de coxa",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-033",
+    "name": "Terra + Desenvolvimento",
+    "muscle": "Inferiores",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-034",
+    "name": "Abdominal Remador",
+    "muscle": "Core e abdômen",
+    "category": "Abdominal",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-035",
+    "name": "Abdominal Remador Unilateral",
+    "muscle": "Core e abdômen",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-036",
+    "name": "Abdominal Bicicleta",
+    "muscle": "Core e abdômen",
+    "category": "Abdominal",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-037",
+    "name": "Abdominal Oblíquo E",
+    "muscle": "Core e abdômen",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-038",
+    "name": "Abdominal Oblíquo D",
+    "muscle": "Core e abdômen",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-039",
+    "name": "Abdominal + Jab + Direto",
+    "muscle": "Core e abdômen",
+    "category": "Combate",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-040",
+    "name": "Abdominal Infra",
+    "muscle": "Core e abdômen",
+    "category": "Abdominal",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-041",
+    "name": "Abdominal Supra + Rotação de Tronco",
+    "muscle": "Core e abdômen",
+    "category": "Abdominal",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-042",
+    "name": "Superman",
+    "muscle": "Core e abdômen",
+    "category": "Lombar",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-043",
+    "name": "Abdominal + Passar as Pernas por Cima",
+    "muscle": "Core e abdômen",
+    "category": "Abdominal",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-044",
+    "name": "Prancha",
+    "muscle": "Core e abdômen",
+    "category": "Estabilidade",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-045",
+    "name": "Prancha Alta + Prancha Baixa",
+    "muscle": "Core e abdômen",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-046",
+    "name": "Prancha Baixa + Prancha Alta",
+    "muscle": "Core e abdômen",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-047",
+    "name": "Prancha + Feet Touch",
+    "muscle": "Core e abdômen",
+    "category": "Estabilidade",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-048",
+    "name": "Prancha Alternada",
+    "muscle": "Core e abdômen",
+    "category": "Estabilidade",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-049",
+    "name": "Prancha 3 Apoios E",
+    "muscle": "Core e abdômen",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-050",
+    "name": "Prancha 3 Apoios D",
+    "muscle": "Core e abdômen",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-051",
+    "name": "Prancha Tocando o Pé",
+    "muscle": "Core e abdômen",
+    "category": "Estabilidade",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-052",
+    "name": "Prancha Abre e Fecha",
+    "muscle": "Core e abdômen",
+    "category": "Estabilidade",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-053",
+    "name": "Prancha T",
+    "muscle": "Core e abdômen",
+    "category": "Estabilidade",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-054",
+    "name": "Escalador",
+    "muscle": "Cardio e funcional",
+    "category": "Cardio",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-055",
+    "name": "Sprawl + Salto",
+    "muscle": "Cardio e funcional",
+    "category": "Cardio",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-056",
+    "name": "Hop Out Step",
+    "muscle": "Cardio e funcional",
+    "category": "Pliometria",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-057",
+    "name": "Corrida Lateral + Touch Down",
+    "muscle": "Cardio e funcional",
+    "category": "Agilidade",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-058",
+    "name": "Hand Walk",
+    "muscle": "Cardio e funcional",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-059",
+    "name": "Senta, Levanta e Pula",
+    "muscle": "Cardio e funcional",
+    "category": "Pliometria",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-060",
+    "name": "Joelhada no Step E",
+    "muscle": "Cardio e funcional",
+    "category": "Combate",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-061",
+    "name": "Joelhada no Step D",
+    "muscle": "Cardio e funcional",
+    "category": "Combate",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-062",
+    "name": "Joelhada no Step Alternada",
+    "muscle": "Cardio e funcional",
+    "category": "Combate",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-mma-063",
+    "name": "Polichinelo + Desenvolvimento",
+    "muscle": "Cardio e funcional",
+    "category": "Combinado",
+    "type": "Full Body",
+    "available": true
   }
 ]

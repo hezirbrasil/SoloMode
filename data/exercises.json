@@ -1,0 +1,218 @@
+[
+  {
+    "id": "ex-chest-press",
+    "name": "Supino",
+    "muscle": "Peitoral",
+    "category": "Força",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-chest-fly",
+    "name": "Crucifixo",
+    "muscle": "Peitoral",
+    "category": "Força",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lat-pulldown",
+    "name": "Pulldown",
+    "muscle": "Costas",
+    "category": "Puxar",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-row-open",
+    "name": "Remada Aberta",
+    "muscle": "Costas",
+    "category": "Puxar",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-row-close",
+    "name": "Remada Fechada",
+    "muscle": "Costas",
+    "category": "Puxar",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-reverse-fly",
+    "name": "Crucifixo invertido",
+    "muscle": "Ombros",
+    "category": "Posterior de ombro",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-front-raise",
+    "name": "Elevação frontal",
+    "muscle": "Ombros",
+    "category": "Anterior de ombro",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lateral-raise",
+    "name": "Elevação lateral",
+    "muscle": "Ombros",
+    "category": "Lateral de ombro",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-shoulder-press",
+    "name": "Desenvolvimento",
+    "muscle": "Ombros",
+    "category": "Empurrar",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-0",
+    "name": "Agachamento sumô",
+    "muscle": "Membros inferiores",
+    "category": "Agachamento",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-1",
+    "name": "Agachamento neutro",
+    "muscle": "Membros inferiores",
+    "category": "Agachamento",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-2",
+    "name": "Agachamento livre",
+    "muscle": "Membros inferiores",
+    "category": "Agachamento",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-3",
+    "name": "Agachamento abre e fecha tocando o solo",
+    "muscle": "Membros inferiores",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-4",
+    "name": "Agachamento com rotação",
+    "muscle": "Membros inferiores",
+    "category": "Funcional",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-5",
+    "name": "Avanço alternado",
+    "muscle": "Membros inferiores",
+    "category": "Unilateral",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-6",
+    "name": "Stiff unilateral E",
+    "muscle": "Membros inferiores",
+    "category": "Posterior de coxa",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-7",
+    "name": "Stiff unilateral D",
+    "muscle": "Membros inferiores",
+    "category": "Posterior de coxa",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-8",
+    "name": "Panturrilha",
+    "muscle": "Membros inferiores",
+    "category": "Panturrilha",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-lower-9",
+    "name": "Terra",
+    "muscle": "Membros inferiores",
+    "category": "Posterior de coxa",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-core-0",
+    "name": "Abdominal Infra Alternado",
+    "muscle": "Core",
+    "category": "Abdominal",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-core-1",
+    "name": "Abdominal Supra com Rotação",
+    "muscle": "Core",
+    "category": "Abdominal",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-core-2",
+    "name": "Russian Twist",
+    "muscle": "Core",
+    "category": "Rotação de tronco",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-cardio-0",
+    "name": "Sprawl",
+    "muscle": "Cardio e Funcional",
+    "category": "Cardio",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-cardio-1",
+    "name": "Sprawl com salto",
+    "muscle": "Cardio e Funcional",
+    "category": "Cardio",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-cardio-2",
+    "name": "Salto no step",
+    "muscle": "Cardio e Funcional",
+    "category": "Pliometria",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-cardio-3",
+    "name": "Sprint",
+    "muscle": "Cardio e Funcional",
+    "category": "Cardio",
+    "type": "Full Body",
+    "available": true
+  },
+  {
+    "id": "ex-cardio-4",
+    "name": "Polichinelo",
+    "muscle": "Cardio e Funcional",
+    "category": "Cardio",
+    "type": "Full Body",
+    "available": true
+  }
+]

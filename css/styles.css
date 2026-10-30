@@ -318,3 +318,12 @@ body{background:#050308;color:#fff}
  .lesson-footer{color:#c4b5d2}
  .lesson-footer .btn{color:#fff}
 }
+
+/* Biblioteca do Solo: agrupamento muscular visível e legível */
+.exercise-muscle-group{display:flex;flex-direction:column;gap:6px;margin:0 0 14px}
+.exercise-muscle-heading{display:flex;align-items:center;justify-content:space-between;margin:8px 0 2px;padding:8px 10px;border-bottom:1px solid #63358a;color:#d7a8ff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.exercise-muscle-heading span{display:inline-flex;align-items:center;justify-content:center;min-width:23px;height:21px;padding:0 6px;border-radius:20px;background:#241034;color:#fff;font-size:10px;letter-spacing:0}
+.exercise-option{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.exercise-option>div{min-width:0}
+.exercise-option strong{display:block;white-space:normal;overflow-wrap:anywhere}
+.exercise-option small{display:block}

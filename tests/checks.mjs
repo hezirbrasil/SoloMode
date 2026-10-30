@@ -1,0 +1,14 @@
+import {readFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const js=readFileSync(new URL('../js/app.js',import.meta.url),'utf8');
+const bank=readFileSync(new URL('../js/exercise-bank.js',import.meta.url),'utf8');
+assert.match(html,/id="view-builder"/);
+assert.match(html,/id="view-bank"/);
+assert.match(html,/id="view-script"/);
+assert.match(html,/id="view-lessons"/);
+assert.match(js,/renderBlocks\(\)/);
+assert.match(js,/beforeunload/);
+assert.match(bank,/Stiff unilateral E/);
+assert.match(bank,/Stiff unilateral D/);
+console.log('Structural checks passed.');

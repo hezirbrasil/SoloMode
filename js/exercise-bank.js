@@ -90,7 +90,7 @@ const BASE=[
 ];
 
 const ALIASES={
- 'agachamentoabre efechatocandoosolo':'Agachamento + Abre e Fecha Tocando o Solo',
+ 'agachamentoabreefechatocandoosolo':'Agachamento + Abre e Fecha Tocando o Solo',
  'agachamentocomrotacao':'Agachamento + Rotação',
  'sprawlcomsalto':'Sprawl + Salto',
  'abdominalsupacomrotacao':'Abdominal Supra + Rotação de Tronco'
@@ -106,7 +106,7 @@ export function mergeExerciseBanks(saved=[],initial=INITIAL_EXERCISES){
  for(const item of saved||[]){const name=canonicalExerciseName(item.name);const key=normalizeExerciseKey(name);if(!key||merged.has(key))continue;merged.set(key,{...item,name,muscle:canonicalMuscle(item.muscle),available:item.available!==false})}
  return [...merged.values()];
 }
-function canonicalMuscle(value){const key=normalizeExerciseKey(value);const aliases={'peitoral':'Peito','peito':'Peito','membrosinferiores':'Inferiores','inferiores':'Inferiores','core':'Core e abdômen','coreeabdomen':'Core e abdômen','cardioefuncional':'Cardio e funcional','cardioefuncional':'Cardio e funcional','cardioefuncionais':'Cardio e funcional','ombros':'Ombros','costas':'Costas','bicepse triceps':'Bíceps e tríceps','bicepsetriceps':'Bíceps e tríceps'};return aliases[key]||value||'Personalizado'}
+function canonicalMuscle(value){const key=normalizeExerciseKey(value);const aliases={'peitoral':'Peito','peito':'Peito','membrosinferiores':'Inferiores','inferiores':'Inferiores','core':'Core e abdômen','coreeabdomen':'Core e abdômen','cardioefuncional':'Cardio e funcional','cardioefuncionais':'Cardio e funcional','ombros':'Ombros','costas':'Costas','bicepsetriceps':'Bíceps e tríceps','bicepsetriceps':'Bíceps e tríceps'};return aliases[key]||value||'Personalizado'}
 export function addExercise(bank,data){const name=data.name.trim();if(!name)throw new Error('Informe o nome do exercício.');if(bank.some(item=>normalizeExerciseKey(canonicalExerciseName(item.name))===normalizeExerciseKey(canonicalExerciseName(name))))throw new Error('Já existe um exercício com esse nome.');return [...bank,{id:makeId(),name:canonicalExerciseName(name),muscle:data.muscle.trim(),category:(data.category||'Geral').trim(),type:data.type==='Leg Blast'?'Leg Blast':'Full Body',available:true,custom:true}]}
 export function updateExercise(bank,id,data){const name=data.name.trim();if(bank.some(item=>item.id!==id&&normalizeExerciseKey(canonicalExerciseName(item.name))===normalizeExerciseKey(canonicalExerciseName(name))))throw new Error('Já existe um exercício com esse nome.');return bank.map(item=>item.id===id?{...item,...data,name:canonicalExerciseName(name),muscle:data.muscle.trim(),category:(data.category||'Geral').trim()}:item)}
 export function removeExercise(bank,id){return bank.filter(item=>item.id!==id)}

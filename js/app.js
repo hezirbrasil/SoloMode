@@ -3,7 +3,10 @@ import {createLesson,LessonBuilder} from './lesson-builder.js';
 import {loadBank,saveBank,loadLessons,saveLessons,loadCurrent,saveCurrent,makeId,normalizeLesson,exportJson,importJson} from './storage.js';
 import {renderScript} from './script-view.js';
 const $=id=>document.getElementById(id);
-let bank=loadBank()||INITIAL_EXERCISES,lessons=loadLessons(),current=normalizeLesson(loadCurrent()||createLesson()),builder=new LessonBuilder(current),selected=new Set(),muscleFilter='';
+const savedBank=loadBank();
+const bankByName=new Map((savedBank||[]).map(item=>[String(item.name).toLocaleLowerCase('pt-BR'),item]));
+for(const item of INITIAL_EXERCISES){const key=String(item.name).toLocaleLowerCase('pt-BR');if(!bankByName.has(key))bankByName.set(key,item)}
+let bank=[...bankByName.values()],lessons=loadLessons(),current=normalizeLesson(loadCurrent()||createLesson()),builder=new LessonBuilder(current),selected=new Set(),muscleFilter='';
 const MUSCLE_ORDER=['Peitoral','Costas','Ombros','Membros inferiores','Core','Cardio e Funcional'];
 function persist(){saveBank(bank);saveLessons(lessons);saveCurrent(current);$('save-status').textContent='Salvo localmente'}
 function notify(message){$('save-status').textContent=message;setTimeout(()=>{if($('save-status').textContent===message)persist()},2000)}
